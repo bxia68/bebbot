@@ -11,6 +11,9 @@ import os
 import platform
 import random
 import sys
+# Module Imports
+import mariadb
+
 
 import discord
 from discord.ext import commands, tasks
@@ -136,6 +139,21 @@ async def on_command_error(context, error):
         await context.send(embed=embed)
     raise error
 
+# Connect to MariaDB Platform
+try:
+    conn = mariadb.connect(
+        user="root",
+        password=config["db_pass"],
+        host="localhost",
+        port=3306,
+        database="bebbot"
+    )
+except mariadb.Error as e:
+    print(f"Error connecting to MariaDB Platform: {e}")
+    sys.exit(1)
+
+# Get Cursor
+cur = conn.cursor()
 
 # Run the bot with the token
 bot.run(config["token"])

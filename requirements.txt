@@ -1,0 +1,4 @@
+aiohttp~=3.7.4.post0
+asyncio~=3.4.3
+discord.py
+httpx~=0.18.2
